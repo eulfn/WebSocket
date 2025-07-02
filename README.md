@@ -43,7 +43,7 @@ All messages use a JSON structure:
 {
   "type": "chat",
   "payload": {
-    "message": "hello"
+    "message": "hi"
   }
 }
 ```
