@@ -1,16 +1,16 @@
 # Modular WebSocket Base Server
 
-A reusable, extensible WebSocket server base for Node.js using the `ws` library. Supports custom event routing, client tracking, broadcasting, room support, and a clean JSON protocol. Includes a simple HTML client example.
+This project provides a reusable and extensible WebSocket server base for Node.js using the `ws` library. It supports custom event routing, client tracking, broadcasting, room support, and a structured JSON protocol. A simple HTML client example is included.
 
 ## Features
-- Custom event routing (define handlers for message types like `chat`, `ping`, `auth`, etc.)
+- Custom event routing (define handlers for message types such as `chat`, `ping`, `auth`, etc.)
 - Client connection tracking with unique IDs
-- Broadcasting to all or specific clients
+- Broadcasting to all or selected clients
 - Room/channel support
-- Extensible: plug in new features (auth, logging, etc.)
-- Clean JSON message protocol
+- Extensible design for additional features (authentication, logging, etc.)
+- Consistent JSON message protocol
 - Basic error handling
-- Production-ready structure and security hooks
+- Structure and hooks suitable for production use
 
 ## Folder Structure
 ```
@@ -51,7 +51,7 @@ All messages use a JSON structure:
 ## Example Usage
 - **Send a chat message:**
   ```json
-  { "type": "chat", "payload": { "message": "Hello world!" } }
+  { "type": "chat", "payload": { "message": "Wsg!" } }
   ```
 - **Ping the server:**
   ```json
@@ -65,14 +65,14 @@ All messages use a JSON structure:
 ## Extending the Server
 - Add new event handlers in `src/server/index.js` using `wss.on('eventType', handler)`.
 - Use the `WebSocketServer` class to broadcast, send to specific clients, or manage rooms.
-- Plug in authentication, logging, or other middleware via constructor hooks or by extending the class.
-- Implement security checks in the `verifyClient` option or message handlers.
+- Additional features such as authentication or logging can be integrated via constructor hooks or by extending the class.
+- Security checks can be implemented in the `verifyClient` option or within message handlers.
 
 ## Security Notes
-- Use `verifyClient` for authentication/authorization.
+- Use `verifyClient` for authentication and authorization.
 - Validate all incoming message payloads.
-- Consider rate limiting and origin checks for production.
+- Consider implementing rate limiting and origin checks for production deployments.
 
 ---
 
-**Ready to build scalable, real-time apps!** 
+**Dont Forget Star's!** 
