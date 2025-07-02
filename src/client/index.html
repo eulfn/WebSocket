@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WebSocket Client</title>
+  <style>
+    body { font-family: sans-serif; margin: 2em; }
+    #log { border: 1px solid #ccc; height: 200px; overflow-y: auto; margin-bottom: 1em; padding: 0.5em; }
+    #msg { width: 70%; }
+  </style>
+</head>
+<body>
+  <h2>WebSocket Client</h2>
+  <div id="log"></div>
+  <input id="msg" placeholder="Type a message..." />
+  <button onclick="sendChat()">Send Chat</button>
+  <button onclick="sendPing()">Ping</button>
+  <script>
+    const log = (msg) => {
+      const el = document.getElementById('log');
+      el.innerHTML += msg + '<br>';
+      el.scrollTop = el.scrollHeight;
+    };
+    
+    const ws = new WebSocket('ws://localhost:8080');
+    ws.onopen = () => log('Connected to server');
+    ws.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        log(`<b>${data.type}</b>: ${JSON.stringify(data.payload)}`);
+      } catch (e) {
+        log('Received non-JSON: ' + event.data);
+      }
+    };
+    ws.onclose = () => log('Disconnected');
+    ws.onerror = (e) => log('WebSocket error');
+
+    function sendChat() {
+      const msg = document.getElementById('msg').value;
+      ws.send(JSON.stringify({ type: 'chat', payload: { message: msg } }));
+      document.getElementById('msg').value = '';
+    }
+    function sendPing() {
+      ws.send(JSON.stringify({ type: 'ping', payload: {} }));
+    }
+  </script>
+</body>
+</html> 
